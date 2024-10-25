@@ -1,11 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://4oew86dexol5"]
+[gd_scene load_steps=15 format=3 uid="uid://4oew86dexol5"]
 
 [ext_resource type="Script" path="res://scenes/planet1.cs" id="1_ckitk"]
 [ext_resource type="Script" path="res://scenes/player.cs" id="1_jcj5e"]
 [ext_resource type="Script" path="res://scenes/MapGenerator.cs" id="2_efmok"]
 [ext_resource type="Texture2D" uid="uid://c3x2se1lu6mtp" path="res://scenes/Planet1/first_character-Sheet.png" id="2_qv381"]
-[ext_resource type="Texture2D" uid="uid://glsw1nuvwbyw" path="res://scenes/Planet1/Grass.png" id="3_rmg56"]
-[ext_resource type="Texture2D" uid="uid://bhlbr7xifqyj" path="res://scenes/Planet1/Dirt.png" id="5_7vxm1"]
+[ext_resource type="Texture2D" uid="uid://bw3jdt704oyye" path="res://scenes/Planet1/TileSetTemp.png" id="4_15u7r"]
 [ext_resource type="Texture2D" uid="uid://vlam38o6ecq4" path="res://scenes/Planet1/DirtBackground.png" id="6_bbw55"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_50lcu"]
@@ -17,27 +16,19 @@ texture_region_size = Vector2i(64, 64)
 tile_size = Vector2i(64, 64)
 sources/1 = SubResource("TileSetAtlasSource_50lcu")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dobxx"]
-texture = ExtResource("3_rmg56")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vaqsd"]
+resource_name = "TileSet"
+texture = ExtResource("4_15u7r")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 
 [sub_resource type="TileSet" id="TileSet_wg04v"]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
-sources/1 = SubResource("TileSetAtlasSource_dobxx")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uc244"]
-texture = ExtResource("5_7vxm1")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-
-[sub_resource type="TileSet" id="TileSet_u1ocl"]
-tile_size = Vector2i(64, 64)
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_uc244")
+sources/2 = SubResource("TileSetAtlasSource_vaqsd")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oq8y0"]
 size = Vector2(44, 62)
@@ -84,14 +75,11 @@ script = ExtResource("1_ckitk")
 [node name="MapGenerator" type="Node2D" parent="."]
 script = ExtResource("2_efmok")
 
-[node name="DirtBackground" type="TileMapLayer" parent="MapGenerator"]
+[node name="Backgrounds" type="TileMapLayer" parent="MapGenerator"]
 tile_set = SubResource("TileSet_6yq40")
 
-[node name="Grass" type="TileMapLayer" parent="MapGenerator"]
+[node name="Blocks" type="TileMapLayer" parent="MapGenerator"]
 tile_set = SubResource("TileSet_wg04v")
-
-[node name="Dirt" type="TileMapLayer" parent="MapGenerator"]
-tile_set = SubResource("TileSet_u1ocl")
 
 [node name="player" type="CharacterBody2D" parent="."]
 script = ExtResource("1_jcj5e")

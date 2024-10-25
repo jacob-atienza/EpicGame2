@@ -4,22 +4,21 @@ using System.Collections.Generic;
 
 public partial class MapGenerator : Node2D
 {
-	private TileMapLayer grassLayer;
-	private TileMapLayer dirtLayer;
-	private TileMapLayer dirtBackgroundLayer;
+	private TileMapLayer blocks;
+	private TileMapLayer backgrounds;
 	private FastNoiseLite fastNoiseLite;
 
-	const int width = 25;
-	const int height = 25;
+	const int chunkWidth = 32;
+	const int height = 64;
+	private const int surfaceHeight = 64;
 	private const float scale = 0.1f;
 
 	public override void _Ready()
 	{
-		grassLayer = GetNode<TileMapLayer>("Grass");
-		dirtLayer = GetNode<TileMapLayer>("Dirt");
-		dirtBackgroundLayer = GetNode<TileMapLayer>("DirtBackground");
+		blocks = GetNode<TileMapLayer>("Blocks");
+		backgrounds = GetNode<TileMapLayer>("Backgrounds");
 
-		fastNoiseLite = new FastNoiseLite();
+
 		GenerateWorld();
 	}
 
@@ -30,35 +29,30 @@ public partial class MapGenerator : Node2D
 
 	private void GenerateWorld()
 	{
-		RandomNumberGenerator rng = new();
-		rng.Randomize();
-		fastNoiseLite.Seed = rng.RandiRange(0, 500);
-		fastNoiseLite.NoiseType = FastNoiseLite.NoiseTypeEnum.Simplex;
-		fastNoiseLite.FractalOctaves = 2;
-		fastNoiseLite.FractalGain = 0;
-		for (int x = 0; x < width; x++)
+		var softNoise = new FastNoiseLite();
+		softNoise.Seed = 6969;
+		for (int x = 0; x < chunkWidth; x++)
 		{
-			for (int y = 5; y < height; y++)
+			var y = Math.Floor(fastNoiseLite.GetNoise2D(x / 32f, 0) * 0.1)*surfaceHeight*.2;
+			for (int zebra = 5; y < height; y++)
 			{
+				Vector2I current = new Vector2I(x, y);
+				Vector2I above = new Vector2I(x, y - 1);
 				float noiseValue = fastNoiseLite.GetNoise2D(x, y);
-				if (noiseValue > 0.5f)
+				GD.Print($"Above Source ID = {blocks.GetCellSourceId(above)}");
+				if (blocks.GetCellSourceId(above) == -1)
 				{
-					grassLayer.SetCell(new Vector2I(x, y),1, new Vector2I(0,0), 0);
-					dirtBackgroundLayer.SetCell(new Vector2I(x, y),1, new Vector2I(0,0), 0);
-					GD.Print($"Placing Grass at ({x}, {y}) with noise {noiseValue}");
+					blocks.SetCell(current, 2, new Vector2I(0, 0), 0);
+					backgrounds.SetCell(current, 1, new Vector2I(0, 0), 0);
 				}
 				else
 				{
-					dirtLayer.SetCell(new Vector2I(x, y),0, new Vector2I(0,0), 0);
-					dirtBackgroundLayer.SetCell(new Vector2I(x, y),1, new Vector2I(0,0), 0);
-					GD.Print($"Placing Dirt at ({x}, {y}) with noise {noiseValue}");
-					if (noiseValue < -0.5f)
-					{
-						dirtBackgroundLayer.SetCell(new Vector2I(x, y),1, new Vector2I(0,0), 0);
-						GD.Print($"Placing Dirt Background at ({x}, {y}) with noise {noiseValue}");
-					}
+					blocks.SetCell(current, 2, new Vector2I(1, 0), 0);
+					backgrounds.SetCell(current, 1, new Vector2I(0, 0), 0);
 				}
+
 			}
 		}
 	}
 }
+
