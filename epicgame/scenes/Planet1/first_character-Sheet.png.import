@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d301y6mlyak0j"
-path="res://.godot/imported/first_character.png-1342c9dcb4cb70767179efb00569bc61.ctex"
+uid="uid://c3x2se1lu6mtp"
+path="res://.godot/imported/first_character-Sheet.png-ea63183e28e43c8e86f088997f673906.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://first_character.png"
-dest_files=["res://.godot/imported/first_character.png-1342c9dcb4cb70767179efb00569bc61.ctex"]
+source_file="res://scenes/Planet1/first_character-Sheet.png"
+dest_files=["res://.godot/imported/first_character-Sheet.png-ea63183e28e43c8e86f088997f673906.ctex"]
 
 [params]
 
