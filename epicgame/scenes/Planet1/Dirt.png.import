@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmdmf2n26vxaj"
-path="res://.godot/imported/QUIT_DEFAULT.png-cddf336474af21b16d9cb30ded3e6a48.ctex"
+uid="uid://bhlbr7xifqyj"
+path="res://.godot/imported/Dirt.png-123f320b9418034b5c25d47175eff4c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/menu/QUIT_DEFAULT.png"
-dest_files=["res://.godot/imported/QUIT_DEFAULT.png-cddf336474af21b16d9cb30ded3e6a48.ctex"]
+source_file="res://scenes/Planet1/Dirt.png"
+dest_files=["res://.godot/imported/Dirt.png-123f320b9418034b5c25d47175eff4c4.ctex"]
 
 [params]
 

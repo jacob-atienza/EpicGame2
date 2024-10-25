@@ -25,7 +25,7 @@ public partial class player : CharacterBody2D
 
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 direction = Input.GetVector("ui_left", "ui_right", "", "");
+		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_down", "ui_up");
 		if (direction != Vector2.Zero)
 		{
 			_animationPlayer.Play("walking");
