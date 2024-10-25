@@ -864,14 +864,14 @@ position = Vector2(1216, 674)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_wd5yj")
 animation = &"rotate"
-frame_progress = 0.800039
+frame_progress = 0.893608
 
 [node name="saturn" type="AnimatedSprite2D" parent="."]
 position = Vector2(585, 237)
 rotation = 1.309
 sprite_frames = SubResource("SpriteFrames_as0mq")
 animation = &"rotate"
-frame_progress = 0.684934
+frame_progress = 0.840888
 
 [connection signal="pressed" from="VBoxContainer/start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/options" to="." method="_on_options_pressed"]
