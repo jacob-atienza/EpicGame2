@@ -1,20 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://4oew86dexol5"]
+[gd_scene load_steps=7 format=4 uid="uid://4oew86dexol5"]
 
 [ext_resource type="Texture2D" uid="uid://d301y6mlyak0j" path="res://first_character.png" id="1_c4m1p"]
 [ext_resource type="Script" path="res://scenes/player.cs" id="1_jcj5e"]
+[ext_resource type="Texture2D" uid="uid://glsw1nuvwbyw" path="res://scenes/Planet1/Grass.png" id="3_rmg56"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oq8y0"]
 size = Vector2(44, 70)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dobxx"]
+texture = ExtResource("3_rmg56")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_wg04v"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_dobxx")
+
 [node name="InitialGame" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="player" type="CharacterBody2D" parent="."]
 script = ExtResource("1_jcj5e")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="playerSprite" type="Sprite2D" parent="player"]
 texture = ExtResource("1_c4m1p")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
 position = Vector2(2, 13)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_oq8y0")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAIAAQAAAAAAAAABAAIAAQAAAAAAAAACAAIAAQAAAAAAAAADAAIAAQAAAAAAAAAEAAIAAQAAAAAAAAAFAAIAAQAAAAAAAAAGAAIAAQAAAAAAAAAHAAIAAQAAAAAAAAAIAAIAAQAAAAAAAAAJAAIAAQAAAAAAAAAKAAIAAQAAAAAAAAALAAIAAQAAAAAAAAAMAAIAAQAAAAAAAAANAAIAAQAAAAAAAAAOAAIAAQAAAAAAAAAPAAIAAQAAAAAAAAAQAAIAAQAAAAAAAAARAAIAAQAAAAAAAAASAAIAAQAAAAAAAAATAAIAAQAAAAAAAAAUAAIAAQAAAAAAAAAVAAIAAQAAAAAAAAAWAAIAAQAAAAAAAAAXAAIAAQAAAAAAAAAYAAIAAQAAAAAAAAAZAAIAAQAAAAAAAAAaAAIAAQAAAAAAAAAbAAIAAQAAAAAAAAAcAAIAAQAAAAAAAAAdAAIAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_wg04v")

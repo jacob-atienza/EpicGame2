@@ -5,7 +5,6 @@ public partial class player : CharacterBody2D
 {
 	public const float Speed = 300.0f;
 	public const float JumpVelocity = -400.0f;
-
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
@@ -27,6 +26,13 @@ public partial class player : CharacterBody2D
 		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		if (direction != Vector2.Zero)
 		{
+			if (direction.X < 0)
+			{
+				Scale = new Vector2(-1, Scale.Y);
+			} else if (direction.X > 0)
+			{
+				Scale = new Vector2(1, Scale.Y);
+			}
 			velocity.X = direction.X * Speed;
 		}
 		else
